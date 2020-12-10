@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+
+<head>
+
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel&family=EB+Garamond&family=Libre+Franklin:wght@100&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{{ url_for('static',filename='css/styles.css') }}">
+  <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
+
+  <title>A.Nim NLP App</title>
+
+</head>
+
+<body>
+  <div class="result" align="center">
+    {% if error_message %}
+    <br>
+    <p style="font-size:2.6rem; color:red;">{{ error_message }}</p>
+    {% endif %}
+  </div>
+  
+  <br>
+  <form action="{{ url_for('main') }}" method="POST">
+    <fieldset>
+      <!-- <textarea rows="12" cols="100" name="text" placeholder="Enter text here..."></textarea> -->
+      <textarea id="description-input" name = "text" rows="" placeholder="Enter your message *" class="" style="height: 300px; width:800px;" required="required"></textarea>
+
+
+      <br>
+
+      <input type="submit" value='Submit' class="btn btn-lg btn-secondary submit-button" onclick="$('#loading').show();">
+      <!-- <input type="submit" value='Submit' class="btn btn-lg btn-secondary submit-button" onclick="show()"> -->
+      <input type="reset" class="btn btn-lg btn-secondary submit-button" value='Reset'>
+
+
+        <!--JQUERY-->
+
+  <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script>
+    function show() {
+          document.getElementById('id1').style.maxHeight = "200px";
+        }
+  </script>
+  <script src="static/js/iframeResizer.contentWindow.min.js">
+  </script>
+
+</body>
+
+</html>

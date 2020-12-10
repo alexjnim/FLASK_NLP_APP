@@ -1,0 +1,6 @@
+__pycache__/*
+.ipynb_checkpoints/
+*.ipynb
+.DS_Store
+resources/__pycache__/*
+CLASSIFIER/data/raw
