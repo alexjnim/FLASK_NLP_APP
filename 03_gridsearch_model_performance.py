@@ -25,7 +25,7 @@ import warnings
 warnings.filterwarnings('ignore')
 # %matplotlib inline
 
-data_df = pd.read_csv('data/cleaned_all_data.csv')
+data_df = pd.read_csv('CLASSIFIER/data/cleaned_all_data.csv')
 
 # +
 from sklearn.model_selection import train_test_split
@@ -146,13 +146,13 @@ res_df
 # # save model
 
 import pickle
-filename = 'model/best_linear_cvs.pkl'
+filename = 'CLASSIFIER/model/best_linear_cvs.pkl'
 pickle.dump(gs_svm.best_estimator_, open(filename, 'wb'))
 
 # # load model
 
 import pickle
-filename = 'model/best_linear_cvs.pkl'
+filename = 'CLASSIFIER/model/best_linear_cvs.pkl'
 loaded_model = pickle.load(open(filename, 'rb'))
 
 loaded_model
