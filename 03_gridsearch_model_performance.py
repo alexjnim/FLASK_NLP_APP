@@ -87,18 +87,6 @@ print('Test Accuracy :', best_svm_test_score)
 
 # ### model performance evaluation with Linear SVC
 
-# +
-import resources.model_evaluation_utils as meu
-
-svm_predictions = gs_svm.predict(test_corpus)
-unique_classes = list(set(test_label_names))
-meu.get_metrics(true_labels=test_label_names, predicted_labels=svm_predictions)
-# -
-
-meu.display_classification_report(true_labels=test_label_names,
-                                  predicted_labels=svm_predictions,
-                                  classes=unique_classes)
-
 # #### testing with new data
 
 # +
