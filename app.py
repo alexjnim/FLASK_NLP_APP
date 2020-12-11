@@ -26,6 +26,5 @@ def main():
         return render_template('results.html', category = category, summary = summary, sentiment = sentiment)
 
 # -
-
 if __name__ == "__main__":
     app.run(port=5000, host='0.0.0.0')
