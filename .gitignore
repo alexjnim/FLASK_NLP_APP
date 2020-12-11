@@ -5,3 +5,4 @@ resources/__pycache__/*
 CLASSIFIER/data/raw
 nlp_app_env/
 Dockerfile
+*.ipynb
