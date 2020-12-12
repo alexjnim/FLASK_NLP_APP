@@ -7,6 +7,8 @@ import networkx
 import resources.text_normalizer as tn
 from sklearn.feature_extraction.text import TfidfVectorizer
 
+
+
 def normalize_document(doc):
     stop_words = nltk.corpus.stopwords.words('english')
     # lower case and remove special characters\whitespaces
@@ -45,13 +47,33 @@ def tfidf_matrix(norm_sentences):
     dt_matrix = dt_matrix.toarray()
     return dt_matrix
 
+# +
 def summarize_text(request):
     text = request.form['text']
-    text = text.replace("\n", ". ").replace("\n\n", " ").replace("\'", " ").strip()
-    num_sentences = 3
-    num_topics = 1
+
+#     text = text.replace("\n", ". ").replace("\n\n", " ").replace("\'", " ").strip()
+    text.replace(". \n", ". ").replace("\n\n", " ").replace("\n", " a. ").replace("\'", " ").strip()
 
     sentences = nltk.sent_tokenize(text)
+
+    to_remove = []
+    for i in range(len(sentences)):
+        if sentences[i][-2:] == 'a.':
+            to_remove.append(sentences[i])
+            continue
+
+        if sentences[i][-1] == '?':
+            to_remove.append(sentences[i])
+            continue
+    sentences = [x for x in sentences if x not in to_remove]
+
+    if len(sentences) <= 3:
+        num_sentences = 1
+    elif len(sentences) > 3 & len(sentences) <= 15:
+        num_sentences = 3
+    elif len(sentences) > 15:
+        num_sentences = np.floor(len(sentences)/5)
+
     normalize_corpus = np.vectorize(normalize_document)
     norm_sentences = normalize_corpus(sentences)
     #norm_sentences = normalize_sentences(sentences)

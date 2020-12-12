@@ -24,7 +24,6 @@ def predict_sentiment(request):
                                          stopwords=stopword_list)
         norm_sentences.append(norm_sentence[0])
     text = norm_sentences[0]
-    print(text)
 
     afn = Afinn()
     sentiment_score = afn.score(text)
