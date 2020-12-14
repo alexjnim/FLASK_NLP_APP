@@ -52,13 +52,13 @@ def summarize_text(request):
     text = request.form['text']
 
 #     text = text.replace("\n", ". ").replace("\n\n", " ").replace("\'", " ").strip()
-    text.replace(". \n", ". ").replace("\n\n", " ").replace("\n", " a. ").replace("\'", " ").strip()
+    text = text.replace(". \n", ". ").replace("\n\n", " ").replace("\n", " a. ").replace("\'", " ").strip()
 
     sentences = nltk.sent_tokenize(text)
 
     to_remove = []
     for i in range(len(sentences)):
-        if sentences[i][-2:] == 'a.':
+        if sentences[i][-2:] == 'a. ':
             to_remove.append(sentences[i])
             continue
 
