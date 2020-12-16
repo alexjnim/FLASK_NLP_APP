@@ -3,8 +3,8 @@ import pandas as pd
 import pickle
 import nltk
 import resources.text_normalizer as tn
-from sklearn.feature_extraction.text import TfidfVectorizer
-from sklearn.svm import LinearSVC
+# from sklearn.feature_extraction.text import TfidfVectorizer
+# from sklearn.svm import LinearSVC
 
 def predict_category(request):
     text = request.form['text']

@@ -1,5 +1,5 @@
 import nltk
-import spacy
+# import spacy
 import unicodedata
 from resources.contractions import CONTRACTION_MAP
 import re
