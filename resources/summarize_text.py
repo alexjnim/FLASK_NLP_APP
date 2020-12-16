@@ -52,20 +52,23 @@ def summarize_text(request):
     text = request.form['text']
 
 #     text = text.replace("\n", ". ").replace("\n\n", " ").replace("\'", " ").strip()
-    text = text.replace(". \n", ". ").replace("\n\n", " ").replace("\n", " a. ").replace("\'", " ").strip()
+    # text = text.replace(". \n", ". ").replace("\n\n", " ").replace("\n", " a. ").replace("\'", " ").strip()
+    text = text.replace(". \n", ". ").replace("\n\n", " ").replace("\n", "a. ").replace("\'", "'").strip(".")
 
     sentences = nltk.sent_tokenize(text)
 
     to_remove = []
     for i in range(len(sentences)):
-        if sentences[i][-2:] == 'a. ':
+        if sentences[i][-2:] == 'a.':
             to_remove.append(sentences[i])
             continue
 
         if sentences[i][-1] == '?':
             to_remove.append(sentences[i])
             continue
+
     sentences = [x for x in sentences if x not in to_remove]
+    sentences = [x.replace("a. ", "") for x in sentences]
 
     if len(sentences) <= 3:
         num_sentences = 1
