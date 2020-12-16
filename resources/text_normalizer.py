@@ -129,7 +129,7 @@ def normalize_corpus(corpus, html_stripping=True, contraction_expansion=True,
 
         # stem text
         if text_stemming and not text_lemmatization:
-        	doc = simple_porter_stemming(doc)
+            doc = simple_porter_stemming(doc)
 
         # remove special characters and\or digits
         if special_char_removal:

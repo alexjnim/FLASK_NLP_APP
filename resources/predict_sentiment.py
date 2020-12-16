@@ -19,7 +19,7 @@ def predict_sentiment(request):
         norm_sentence = tn.normalize_corpus(corpus=pd.Series(sentence), html_stripping=True,
                                          contraction_expansion=True, accented_char_removal=True,
                                          text_lower_case=True, text_lemmatization=True,
-                                         text_stemming=False, special_char_removal=True,
+                                         text_stemming=True, special_char_removal=True,
                                          remove_digits=True, stopword_removal=True,
                                          stopwords=stopword_list)
         norm_sentences.append(norm_sentence[0])

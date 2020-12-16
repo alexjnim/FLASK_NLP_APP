@@ -19,32 +19,67 @@
 
 <body>
   <br>
-  <div class="container">
+  <div class="container" style="width:830px; padding-left:0px; padding-right:0px;">
     <div class="col-lg-12">
 
-      <h2>Category:</h2>
-      <br>
-      <p>{{ category }}</p>
-      <br>
-      <h2>Sentiment:</h2>
-      <br>
-      <p>{{ sentiment }}</p>
-      <h2>Summary:</h2>
-      <br>
-      {% for x in summary %}
-      <p style="font-size:20px; margin-bottom:0px">{{ x }}</p>
-      {% endfor%}
+      {% if category is defined %}
+      <h2 style="font-size: 1.5rem; text-align: left;">Category:</h2>
 
+      <p style="text-align: left;">{{ category }}</p>
+      {% endif %}
+
+      {% if sentiment is defined %}
+
+      <h2 style="font-size: 1.5rem; text-align: left;">Sentiment:</h2>
+
+      <p style="text-align: left;">{{ sentiment }}</p>
+      {% endif %}
+
+
+
+      {% if summary is defined %}
+      <h2 style="font-size: 1.5rem; text-align: left;">Summary:</h2>
+
+      {% for x in summary %}
+      <p style="font-size:20px; margin-bottom:0px; text-align: left; padding-bottom: 4px;"> - {{ x }}</p>
+      {% endfor%}
+      {% endif %}
+
+      {% if question is defined %}
+      <h2 style="font-size: 1.5rem; text-align: left;">Question:</h2>
+      <p style="font-size:20px; margin-bottom:0px; text-align: left; padding-bottom: 4px;">{{ question }}</p>
+      {% endif %}
+
+      {% if answers is defined%}
+      <h2 style="font-size: 1.5rem; text-align: left;">Answers:</h2>
+      {% for x in answers %}
+      <p style="font-size:20px; margin-bottom:0px; text-align: left; padding-bottom: 4px;"> - {{ x }}</p>
+      {% endfor%}
+      {% endif %}
+      <!-- <a href="/"> <input type="button" class="btn btn-lg btn-secondary submit-button" value="Try again"> </a> -->
+      <br>
+      <form action="{{ url_for('answer_query') }}" method="POST">
+        <fieldset>
+          <input type="hidden" id="text" name="text" value="{{ text }}">
+          <input type="hidden" id="summary" name="summary" value="{{ summary }}">
+
+          {% if question is defined %}
+          <p style="text-align: left; color: orange;">I hope you got the answer you were looking for.</p>
+          <textarea id="query" name="query" rows="" placeholder="Ask another question here." class="" style="height: 100px; width:800px;" required="required"></textarea>
+          {% else%}
+          <textarea id="query" name="query" rows="" placeholder="Ask a question about the article here and see if we get the right answer." class="" style="height: 100px; width:800px;" required="required"></textarea>
+          {% endif %}
+
+          <br>
+          <input type="submit" value='Submit' class="btn btn-lg btn-secondary submit-button">
+
+          <a href="/"> <input type="button" class="btn btn-lg btn-secondary submit-button" value="Try again"> </a>
+
+        </fieldset>
+      </form>
 
     </div>
   </div>
-<br>
-<br>
-
-
-  <a href="/"> <input type="button" class="btn btn-lg btn-secondary submit-button" value="Try again"> </a>
-
-
 
   <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script src="static/js/iframeResizer.contentWindow.min.js">

@@ -1,6 +1,7 @@
 from resources.predict_category import predict_category
 from resources.summarize_text import summarize_text
 from resources.predict_sentiment import predict_sentiment
+from resources.get_answer_from_query import get_answer_from_query
 from flask import Flask, render_template, request, json
 
 # +
@@ -23,8 +24,16 @@ def main():
         category = predict_category(request)
         summary = summarize_text(request)
         sentiment = predict_sentiment(request)
-        return render_template('results.html', category = category, summary = summary, sentiment = sentiment)
+        return render_template('results.html', category = category, summary = summary, sentiment = sentiment, text = request.form['text'])
 
+@app.route('/results.html', methods=['POST'])
+def answer_query():
+    if request.method == 'POST':
+
+        answers = get_answer_from_query(request)
+        print('the answers retrieved are:')
+        print(answers)
+        return render_template('results.html', answers = answers, text = request.form['text'], question = request.form['query'])
 # -
 if __name__ == "__main__":
-    app.run(host='0.0.0.0', port=5000)
+    app.run(host='0.0.0.0', debug=True, port=5000)

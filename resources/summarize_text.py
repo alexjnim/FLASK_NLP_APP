@@ -34,7 +34,7 @@ def normalize_sentences(sentences):
         norm_sentence = tn.normalize_corpus(corpus=pd.Series(sentence), html_stripping=True,
                                          contraction_expansion=True, accented_char_removal=True,
                                          text_lower_case=True, text_lemmatization=True,
-                                         text_stemming=False, special_char_removal=True,
+                                         text_stemming=True, special_char_removal=True,
                                          remove_digits=True, stopword_removal=True,
                                          stopwords=stopword_list)
         norm_sentences.append(norm_sentence[0])
@@ -52,19 +52,21 @@ def summarize_text(request):
     text = request.form['text']
 
 #     text = text.replace("\n", ". ").replace("\n\n", " ").replace("\'", " ").strip()
-    text = text.replace(". \n", ". ").replace("\n\n", " ").replace("\n", " a. ").replace("\'", " ").strip()
+    # text = text.replace(". \n", ". ").replace("\n\n", " ").replace("\n", " a. ").replace("\'", "'").strip(".")
+    text = text.replace(". \n", ". ").replace("\n\n", " ").replace("\n", "a. ").replace("\'", "'").strip(".")
 
     sentences = nltk.sent_tokenize(text)
 
     to_remove = []
     for i in range(len(sentences)):
-        if sentences[i][-2:] == 'a. ':
+        if sentences[i][-2:] == 'a.':
             to_remove.append(sentences[i])
             continue
 
         if sentences[i][-1] == '?':
             to_remove.append(sentences[i])
             continue
+
     sentences = [x for x in sentences if x not in to_remove]
 
     if len(sentences) <= 3:
