@@ -18,7 +18,7 @@ def predict_category(request):
                                      remove_digits=True, stopword_removal=True,
                                      stopwords=stopword_list)
 
-    model_path = './CLASSIFIER/model/best_linear_cvs.pkl'
+    model_path = './model/best_linear_cvs.pkl'
     loaded_model = pickle.load(open(model_path, 'rb'))
     results = loaded_model.predict(np.array(norm_corpus))
 
