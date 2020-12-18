@@ -1,6 +1,7 @@
 from resources.predict_category import predict_category
 from resources.summarize_text import summarize_text
 from resources.predict_sentiment import predict_sentiment
+from resources.get_answers_from_query import get_answers_from_query
 from flask import Flask, render_template, request, json
 
 # +
@@ -15,16 +16,25 @@ def main():
         return(render_template('index.html'))
 
     if request.method == 'POST':
-
         if len(request.form['text']) == 0:
-            message = '*please enter some text'
-            return render_template('index.html', error_message=message)
+            error_message = '*please enter some text'
+            return render_template('index.html', error_message=error_message)
 
         category = predict_category(request)
         summary = summarize_text(request)
         sentiment = predict_sentiment(request)
-        return render_template('results.html', category = category, summary = summary, sentiment = sentiment)
+        return render_template('results.html', category = category, summary = summary, sentiment = sentiment, text=request.form['text'])
 
+@app.route('/results.html', methods=['POST'])
+def answer_query():
+    if request.method == 'POST':
+        summary = summarize_text(request)
+        if len(request.form['query']) == 0:
+            error_message = '*please enter a question'
+            return render_template('results.html', error_message=error_message, summary = summary, text=request.form['text'])
+
+        answers = get_answers_from_query(request)
+        return render_template('results.html', answers = answers, summary = summary, text = request.form['text'], question = request.form['query'])
 # -
 if __name__ == "__main__":
-    app.run(host='0.0.0.0', port=5000)
+    app.run(host='0.0.0.0', port=5000, debug=True)
