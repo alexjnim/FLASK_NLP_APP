@@ -30,7 +30,7 @@ def answer_query():
     if request.method == 'POST':
         summary = summarize_text(request)
         if len(request.form['query']) == 0:
-            error_message = '*please enter a question'
+            error_message = '*please enter a question or try again with another article'
             return render_template('results.html', error_message=error_message, summary = summary, text=request.form['text'])
 
         answers = get_answers_from_query(request)
