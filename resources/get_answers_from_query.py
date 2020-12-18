@@ -7,7 +7,7 @@ def get_answers_from_query(request):
     text = request.form['text']
 
     sentences = nltk.sent_tokenize(text)
-
+    sentences = [s for s in sentences if s[-1] != "?"]
     query = request.form['query']
 
     '''
