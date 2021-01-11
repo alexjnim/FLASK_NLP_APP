@@ -2,9 +2,20 @@ from sentence_transformers import SentenceTransformer
 from sentence_transformers import CrossEncoder
 import nltk
 from nltk import sent_tokenize
+from utilities.url_text_extractor import check_for_url
 
 def get_answers_from_query(request):
+    """
+    Uses infromational retrieval methods to get answers from user query about the inputed text. These queries are answered using the BERT NLP transformer.
+    Input
+    ----------
+    request variable: Flask request variable containing the text for the article
+    Returns
+    ----------
+    The answers to the query.
+    """
     text = request.form['text']
+    text = check_for_url(text)
 
     sentences = nltk.sent_tokenize(text)
     sentences = [s for s in sentences if s[-1] != "?"]

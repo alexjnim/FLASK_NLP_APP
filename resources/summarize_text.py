@@ -4,12 +4,20 @@ import pandas as pd
 import pickle
 import nltk
 import networkx
-import resources.text_normalizer as tn
+import utilities.text_normalizer as tn
+from utilities.url_text_extractor import check_for_url
 from sklearn.feature_extraction.text import TfidfVectorizer
 
-
-
 def normalize_document(doc):
+    """
+    normalize the sentences
+    Input
+    ----------
+    doc (text): all the sentences from the article
+    Returns
+    ----------
+    the normalized sentences
+    """
     stop_words = nltk.corpus.stopwords.words('english')
     # lower case and remove special characters\whitespaces
     doc = re.sub(r'[^a-zA-Z\s]', '', doc, re.I|re.A)
@@ -24,6 +32,15 @@ def normalize_document(doc):
     return doc
 
 def normalize_sentences(sentences):
+    """
+    normalize the sentences
+    Input
+    ----------
+    sentences (array): all the sentences from the article
+    Returns
+    ----------
+    the normalized sentences
+    """
     stopword_list = nltk.corpus.stopwords.words('english')
     stopword_list.remove('no')
     stopword_list.remove('not')
@@ -42,18 +59,35 @@ def normalize_sentences(sentences):
     return np.array(norm_sentences)
 
 def tfidf_matrix(norm_sentences):
+    """
+    Use TfidVectorizer to vecotrize the sentences.
+    Input
+    ----------
+    norm_sentences (array): Normalized sentences
+    Returns
+    ----------
+    A matrix containing elements of all words from each sentences
+    """
     tv = TfidfVectorizer(min_df=0., max_df=1., use_idf=True)
     dt_matrix = tv.fit_transform(norm_sentences)
     dt_matrix = dt_matrix.toarray()
     return dt_matrix
 
-# +
 def summarize_text(request):
+    """
+    Summarizes text by first cleaning the text, normalizing the text and then find sentences with the most network connections with textrank.
+    Input
+    ----------
+    text (string): Text
+    Returns
+    ----------
+    Sentences that summarise the text.
+    """
     text = request.form['text']
-
+    text = check_for_url(text)
 #     text = text.replace("\n", ". ").replace("\n\n", " ").replace("\'", " ").strip()
     # text = text.replace(". \n", ". ").replace("\n\n", " ").replace("\n", " a. ").replace("\'", " ").strip()
-    text = text.replace(". \n", ". ").replace("\n\n", " ").replace("\n", "a. ").replace("\'", "'").strip(".")
+    text = text.replace(". \n", ". ").replace("\n\n", " ").replace("\n", "a. ").replace("\'", "'").strip()
 
     sentences = nltk.sent_tokenize(text)
 

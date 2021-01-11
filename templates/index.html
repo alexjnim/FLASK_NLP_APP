@@ -24,17 +24,17 @@
       <br>
       <p style="font-size:2rem; color:red;">{{ error_message }}</p>
       {% endif %}
-    </div> 
+    </div>
 
     <div class="container">
       <div class="col-lg-12" style="padding: 10px 12% 10px 12%;">
-        <p style="text-align: left;">Enter the text of an article to retrieve it's category, sentiment, and summary.</p>
-        <p style="text-align: left;">You can ask questions about your text in the next page. </p>
+        <p style="text-align: left;">Enter a news article to retrieve it's category, sentiment, and summary.</p>
+        <p style="text-align: left;">You can ask questions about your article in the next page. </p>
         <form action="{{ url_for('main') }}" method="POST">
           <fieldset>
             <!-- <textarea rows="12" cols="100" name="text" placeholder="Enter text here..."></textarea> -->
             <div class="container" style="padding-left:0px; padding-right:0px;">
-              <textarea id="description-input" name="text" rows="" placeholder="Enter article text *" class="" style="height:300px; width:100%;"></textarea>
+              <textarea id="description-input" name="text" rows="" placeholder="Enter URL or copy and paste the text* (BBC articles don't work well here)" class="" style="height:300px; width:100%;"></textarea>
             </div>
 
             <br>

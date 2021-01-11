@@ -24,6 +24,11 @@
     <div class="container">
       <div class="col-lg-12" style="padding: 10px 12% 10px 12%;">
 
+        {% if title != "not title" %}
+        <h2 style="font-size: 1.5rem; text-align: left;">Title:</h2>
+        <p style="text-align: left;">{{ title }}</p>
+        {% endif %}
+        
         {% if category is defined %}
         <h2 style="font-size: 1.5rem; text-align: left;">Category:</h2>
         <p style="text-align: left;">{{ category }}</p>
@@ -55,7 +60,7 @@
         <br>
         <div class="result" align="center">
           {% if error_message %}
-          <br> 
+          <br>
           <p style="font-size:2rem; color:red;">{{ error_message }}</p>
           {% endif %}
         </div>

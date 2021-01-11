@@ -2,12 +2,24 @@ import numpy as np
 import pandas as pd
 import pickle
 import nltk
-import resources.text_normalizer as tn
+import utilities.text_normalizer as tn
+from utilities.url_text_extractor import check_for_url
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.svm import LinearSVC
 
+
 def predict_category(request):
+    """
+    Predicts the category of the text using trained classification model from best_linear_cvs.pkl file
+    Input
+    ----------
+    request variable: Flask request variable containing the text for the article
+    Returns
+    ----------
+    An article's category
+    """
     text = request.form['text']
+    text = check_for_url(text)
     stopword_list = nltk.corpus.stopwords.words('english')
     stopword_list.remove('no')
     stopword_list.remove('not')

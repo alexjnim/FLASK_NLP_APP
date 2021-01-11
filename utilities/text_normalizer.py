@@ -1,7 +1,7 @@
 import nltk
 import spacy
 import unicodedata
-from resources.contractions import CONTRACTION_MAP
+from utilities.contractions import CONTRACTION_MAP
 import re
 from nltk.corpus import wordnet
 import collections
@@ -19,6 +19,15 @@ nlp = en_core_web_sm.load()
 
 
 def strip_html_tags(text):
+    """
+    Removes html tags
+    Input
+    ----------
+    text (string): Text or a url.
+    Returns
+    ----------
+    The stripped text
+    """
     soup = BeautifulSoup(text, "html.parser")
     if bool(soup.find()):
         [s.extract() for s in soup(['iframe', 'script'])]
@@ -34,6 +43,15 @@ def strip_html_tags(text):
 
 
 def simple_porter_stemming(text):
+    """
+    Applies porter stemming on the text
+    Input
+    ----------
+    text (string): Text
+    Returns
+    ----------
+    The stemmed text
+    """
     ps = nltk.porter.PorterStemmer()
     text = ' '.join([ps.stem(word) for word in text.split()])
     return text
