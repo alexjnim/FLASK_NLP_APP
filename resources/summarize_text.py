@@ -114,7 +114,7 @@ def summarize_text(request):
     normalize_corpus = np.vectorize(normalize_document)
     norm_sentences = normalize_corpus(sentences)
     #norm_sentences = normalize_sentences(sentences)
-    print(norm_sentences)
+
     dt_matrix = tfidf_matrix(norm_sentences)
 
     similarity_matrix = np.matmul(dt_matrix, dt_matrix.T)
