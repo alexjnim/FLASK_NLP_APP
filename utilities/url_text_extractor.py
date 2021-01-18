@@ -1,19 +1,3 @@
-# ---
-# jupyter:
-#   jupytext:
-#     formats: ipynb,py:light
-#     text_representation:
-#       extension: .py
-#       format_name: light
-#       format_version: '1.5'
-#       jupytext_version: 1.3.2
-#   kernelspec:
-#     display_name: Python 3
-#     language: python
-#     name: python3
-# ---
-
-# +
 from newspaper import Article
 import validators
 
@@ -27,11 +11,13 @@ def url_text_extractor(url):
     ----------
     An article's text
     """
+    url = url.strip()
     article = Article(url)
     article.download()
     article.parse()
 
     return article.text
+
 
 def check_for_url(text):
     """
@@ -44,7 +30,7 @@ def check_for_url(text):
     ----------
     An article's text
     """
-
+    text = text.strip()
     valid = validators.url(text)
 
     if valid is True:
@@ -53,10 +39,9 @@ def check_for_url(text):
         pass
 
     # clean the text
-    text = text.replace('\n', ' ').replace('\r', '').replace('  ', ' ')
+    text = text.replace("\n", " ").replace("\r", "").replace("  ", " ")
 
     return text
-
 
 
 # -
@@ -71,9 +56,11 @@ def get_url_title(request):
     An article's title
     """
 
-    url = request.form['text']
+    url = request.form["text"]
+    url = url.strip()
+
     valid = validators.url(url)
-    title = 'not title'
+    title = "not title"
     if valid is True:
         article = Article(url)
         article.download()

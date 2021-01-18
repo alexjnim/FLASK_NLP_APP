@@ -25,7 +25,7 @@ def main():
         category = predict_category(request)
         summary = summarize_text(request)
         sentiment = predict_sentiment(request)
-        return render_template('results.html', title = title, category = category, summary = summary, sentiment = sentiment, text=request.form['text'])
+    return render_template('results.html', title = title, category = category, summary = summary, sentiment = sentiment, text=request.form['text'])
 
 @app.route('/results.html', methods=['POST'])
 def answer_query():
@@ -37,7 +37,7 @@ def answer_query():
             return render_template('results.html', error_message=error_message, summary = summary, text=request.form['text'])
 
         answers = get_answers_from_query(request)
-        return render_template('results.html', answers = answers, title = title, summary = summary, text = request.form['text'], question = request.form['query'])
+    return render_template('results.html', answers = answers, title = title, summary = summary, text = request.form['text'], question = request.form['query'])
 # -
 if __name__ == "__main__":
     app.run(host='0.0.0.0', port=5000, debug=False)
