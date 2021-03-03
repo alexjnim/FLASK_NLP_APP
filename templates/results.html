@@ -8,9 +8,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
   <!-- Bootstrap CSS -->
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+    integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
 
-  <link href="https://fonts.googleapis.com/css2?family=Cinzel&family=EB+Garamond&family=Libre+Franklin:wght@100&display=swap" rel="stylesheet">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cinzel&family=EB+Garamond&family=Libre+Franklin:wght@100&display=swap"
+    rel="stylesheet">
 
   <link rel="stylesheet" href="{{ url_for('static',filename='css/styles.css') }}">
 
@@ -28,7 +31,7 @@
         <h2 style="font-size: 1.5rem; text-align: left;">Title:</h2>
         <p style="text-align: left;">{{ title }}</p>
         {% endif %}
-        
+
         {% if category is defined %}
         <h2 style="font-size: 1.5rem; text-align: left;">Category:</h2>
         <p style="text-align: left;">{{ category }}</p>
@@ -37,6 +40,11 @@
         {% if sentiment is defined %}
         <h2 style="font-size: 1.5rem; text-align: left;">Sentiment:</h2>
         <p style="text-align: left;">{{ sentiment }}</p>
+        {% endif %}
+
+        {% if key_words is defined %}
+        <h2 style="font-size: 1.5rem; text-align: left;">Keywords:</h2>
+        <p style="text-align: left;">{{ key_words }}</p>
         {% endif %}
 
         {% if summary is defined %}
@@ -69,9 +77,11 @@
             <input type="hidden" id="text" name="text" value="{{ text }}">
 
             {% if question is defined %}
-            <p style="text-align: left; color: orange;">I hope these results make sense to you. If not, try again with a different article.</p>
+            <p style="text-align: left; color: orange;">I hope these results make sense to you. If not, try again with a
+              different article.</p>
             <div class="container" style="padding-left:0px; padding-right:0px;">
-              <textarea id="query" name="query" rows="" placeholder="Ask another question here." class="" style="height: 100px; width:100%;"></textarea>
+              <textarea id="query" name="query" rows="" placeholder="Ask another question here." class=""
+                style="height: 100px; width:100%;"></textarea>
             </div>
             <div id="loading" style="display: none; padding-top: 30px;">
               <img src="static/loadingimage.gif" alt="" />
@@ -80,7 +90,9 @@
             {% else%}
 
             <div class="container" style="padding-left:0px; padding-right:0px;">
-              <textarea id="query" name="query" rows="" placeholder="Ask a question about the article here and see if we get the right answer." class="" style="height: 100px; width:100%;"></textarea>
+              <textarea id="query" name="query" rows=""
+                placeholder="Ask a question about the article here and see if we get the right answer." class=""
+                style="height: 100px; width:100%;"></textarea>
             </div>
             <div id="loading" style="display: none; padding-top: 30px;">
               <img src="static/loadingimage.gif" alt="" />
@@ -89,7 +101,8 @@
             {% endif %}
 
             <br>
-            <input type="submit" value='Submit' class="btn btn-lg btn-secondary submit-button" onclick="$('#loading').show();">
+            <input type="submit" value='Submit' class="btn btn-lg btn-secondary submit-button"
+              onclick="$('#loading').show();">
 
             <a href="/"> <input type="button" class="btn btn-lg btn-secondary submit-button" value="Try again"> </a>
 
