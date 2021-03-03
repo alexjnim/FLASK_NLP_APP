@@ -1,6 +1,5 @@
 import utilities.text_normalizer as tn
 import nltk
-from operator import itemgetter
 from gensim.summarization import keywords
 from utilities.url_text_extractor import check_for_url
 
