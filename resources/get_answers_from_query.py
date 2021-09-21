@@ -26,7 +26,7 @@ def get_answers_from_query(request):
     It is designed to return the most likely response given an input.
     i.e - its designed for question answering
     '''
-    model = CrossEncoder('sentence-transformers/ce-ms-marco-TinyBERT-L-2')
+    model = CrossEncoder('cross-encoder/ms-marco-TinyBERT-L-2')
 
     model_inputs = [[query, passage] for passage in sentences]
     print(model_inputs)
